@@ -52,15 +52,23 @@ class ClsPersona
         $pre->execute($parametros);
         return $pre;
     }
-    function BuscarPersona($idPersona)
+    function BuscarPersona($nrodoc)
     {
-        $sql = 'SELECT * FROM persona WHERE id_persona= :id_persona';
+        $sql = 'SELECT p.*,c.telefono,c.email FROM persona p INNER JOIN contacto c ON p.id_persona=c.id_persona WHERE p.nro_doc=:nrodoc';
         global $cnx;
         $parametros = [
-            ':id_persona' => $idPersona,
+            ':nrodoc' => $nrodoc,
         ];
         $pre = $cnx->prepare($sql);
         $pre->execute($parametros);
         return $pre;
+    }
+    function ListarPacientes()
+    {
+        $sql =
+            'SELECT p.id_persona, p.nro_doc, p.nombre, p.n_colegiatura, p.estado, p.tipo_persona,p.sexo,c.telefono,c.email
+            FROM persona p INNER JOIN contacto c ON p.id_persona=c.id_persona WHERE p.tipo_persona="P"';
+        global $cnx;
+        return $cnx->query($sql);
     }
 }

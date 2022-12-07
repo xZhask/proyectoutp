@@ -59,6 +59,7 @@ $(function () {
     mostrarmodal('Registro de Profesional')
     $('#FrmProfesional').css('display', 'block')
     $('#accionProfesional').val('REGISTRAR_PERSONA')
+    $('#nrodocProf').prop('readonly', false)
   })
 })
 $(function () {
@@ -156,11 +157,20 @@ async function postData(data) {
   })
   return response
 }
+function ListarPacientes() {
+  let datos = new FormData()
+  datos.append('accion', 'LISTAR_PACIENTES')
+  postData(datos).then(res => res.text()).then((res) => {
+    console.log(res)
+    //$('#tbpacientes').html(res);
+  })
+}
 function ListarProfesionales() {
   let datos = new FormData()
   datos.append('accion', 'LISTAR_PROFESIONALES')
   postData(datos).then(res => res.text()).then((res) => $('#tbprofesionales').html(res))
 }
+
 $(function () {
   $(document).on('click', '#btn-btnSearchProf', function (e) {
     let dni = $('#nrodocProf').val()
@@ -218,19 +228,25 @@ $(function () {
     e.preventDefault()
     let parent = $(this).closest('table')
     let tr = $(this).closest('tr')
-    let idprofesional = $(tr).find('td').eq(0).html()
+    let nrodoc = $(tr).find('td').eq(2).html()
     mostrarmodal('Registro de Profesional')
     $('#FrmProfesional').css('display', 'block')
     $('#accionProfesional').val('EDITAR_PERSONA')
     let datos = new FormData()
     datos.append('accion', 'BUSCAR_PERSONA')
-    datos.append('idPersona', idprofesional)
+    datos.append('nrodoc', nrodoc)
     postData(datos).then(res => res.json()).then(res => {
-      let respuesta = res[0]
-      $('#nombreProfesional').val(respuesta.nombre)
-      $('#direccion').val(respuesta.direccion)
-      $('#provincia').val(respuesta.prov_ubigeo)
-      $('#departamento').val(respuesta.departamento)
+      console.log(res[0])
+      $('#nombreProfesional').val(res[0].nombre)
+      $('#direccion').val(res[0].direccion)
+      $('#provincia').val(res[0].prov_ubigeo)
+      $('#departamento').val(res[0].depart_ubigeo)
+      $('#fechaNac').val(res[0].fecha_nac)
+      $('#colegiatura').val(res[0].n_colegiatura)
+      $('#nrodocProf').val(res[0].nro_doc)
+      $('#email').val(res[0].email)
+      $('#telefono').val(res[0].telefono)
+      $('#nrodocProf').prop('readonly', 'true')
     })
 
   })

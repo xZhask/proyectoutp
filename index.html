@@ -168,7 +168,7 @@
                 <input type="date" name="fechaNac" id="fechaNac" />
               </div>
               <div class="cont-input-form group-input">
-                <label for="fechaNac">Sexo:</label>
+                <label for="sexo">Sexo:</label>
                 <select name="sexo" id="sexo">
                   <option value="0">Seleccionar</option>
                   <option value="M">Masculino</option>
@@ -264,17 +264,17 @@
           </form>
           <form id="FrmPaciente">
             <div class="cont-input-form">
-              <input type="text" placeholder="Número de documento" />
+              <input type="text" placeholder="Número de documento" name="nroDocPaciente" id="nroDocPaciente" />
               <div class="btn-search">
                 <i class="fa-solid fa-magnifying-glass"></i>
               </div>
             </div>
             <div class="cont-input-form">
-              <input type="text" placeholder="Nombre" />
-              <input type="text" placeholder="Apellidos" />
+              <input type="text" placeholder="Nombre" name="nombrePaciente" id="nombrePaciente" />
+              <!--<input type=" text" placeholder="Apellidos" />-->
             </div>
             <div class="cont-input-form">
-              <input type="text" placeholder="Dirección" />
+              <input type="text" placeholder="Dirección" name="direccionPaciente" id="direccionPaciente" />
             </div>
             <div class="cont-input-form">
               <input type="date" name="FechaNac" id="FechaNac" />
@@ -287,14 +287,14 @@
               </select>
             </div>
             <div class="cont-input-form">
-              <input type="text" placeholder="Grado Instrucción" />
-              <input type="text" placeholder="Ocupación" />
+              <input type="text" placeholder="Grado Instrucción" name="gradoPaciente" id="gradoPaciente" />
+              <input type="text" placeholder="Ocupación" name="ocupacionPaciente" id="ocupacionPaciente" />
             </div>
             <div class="cont-input-form">
-              <input type="text" placeholder="Teléfono" />
+              <input type="text" placeholder="Teléfono" name="telefonoPaciente" id="telefonoPaciente" />
             </div>
             <div class="cont-input-form">
-              <input type="email" placeholder="E-mail" />
+              <input type="email" placeholder="E-mail" name="emailPaciente" id="emailPaciente" />
             </div>
             <button type="submit" class="btnform">Registrar Paciente</button>
           </form>

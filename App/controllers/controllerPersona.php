@@ -60,8 +60,46 @@ function controlador($accion)
             echo $tabla;
             break;
         case 'REGISTRAR_PERSONA':
+            $nro_doc = $_POST['nrodocProf'];
+            $infoPersona = $objPersona->BuscarPersona($nro_doc);
+            if ($infoPersona->rowCount() > 0) {
+                $infoPersona = $infoPersona->fetchAll(PDO::FETCH_OBJ);
+
+                $tipoPersona = $_POST['tipoP'];
+                $tipoP = $tipoPersona == 'Profesional' ? 'E' : 'U';
+                $datosPersona = [
+                    'nro_doc' => $nro_doc,
+                    'nombre' => $_POST['nombreProfesional'],
+                    'fecha_nac' => $_POST['fechaNac'],
+                    'sexo' => $_POST['sexo'],
+                    'n_colegiatura' => $_POST['colegiatura'],
+                    'estado' => '1',
+                    'tipo_persona' => $tipoP,
+                    'id_tipodoc' => $_POST['tipodoc'],
+                    'depart_ubigeo' => $_POST['departamento'],
+                    'prov_ubigeo' => $_POST['provincia'],
+                    'direccion' => $_POST['direccion'],
+                    'pass' => $_POST['passw'],
+                    'foto' => 'C:/',
+                ];
+                $RegistrarPersona = $objPersona->RegistrarPersona($datosPersona);
+                if ($RegistrarPersona !== '0') {
+                    $datosContacto = [
+                        'id_persona' => $RegistrarPersona,
+                        'telefono' => $_POST['telefono'],
+                        'email' => $_POST['email'],
+                    ];
+                    $objPersona->RegistrarContacto($datosContacto);
+                    echo 'REGISTRADO';
+                } else {
+                    echo 'OCURRIÓ UN ERROR AL RESGISTRAR';
+                }
+            } else {
+                echo 'DNI YA REGISTRADO';
+            }
+            break;
+        case 'REGISTRAR_PERSONA_P':
             $tipoPersona = $_POST['tipoP'];
-            $tipoP = $tipoPersona == 'Profesional' ? 'E' : 'U';
             $datosPersona = [
                 'nro_doc' => $_POST['nrodocProf'],
                 'nombre' => $_POST['nombreProfesional'],
@@ -69,7 +107,7 @@ function controlador($accion)
                 'sexo' => $_POST['sexo'],
                 'n_colegiatura' => $_POST['colegiatura'],
                 'estado' => '1',
-                'tipo_persona' => $tipoP,
+                'tipo_persona' => 'P',
                 'id_tipodoc' => $_POST['tipodoc'],
                 'depart_ubigeo' => $_POST['departamento'],
                 'prov_ubigeo' => $_POST['provincia'],
@@ -128,9 +166,30 @@ function controlador($accion)
             echo $list;
             break;
         case 'BUSCAR_PERSONA':
-            $infoPersona = $objPersona->BuscarPersona($_POST['idPersona']);
+            $infoPersona = $objPersona->BuscarPersona($_POST['nrodoc']);
             $infoPersona = $infoPersona->fetchAll(PDO::FETCH_OBJ);
             echo json_encode($infoPersona);
+            break;
+        case 'LISTAR_PACIENTES':
+            $tabla = '';
+            $listaPacientes = $objPersona->ListarPacientes();
+            if ($listaPacientes->rowCount() > 0) {
+                while ($fila = $listaPacientes->fetch(PDO::FETCH_NAMED)) {
+                    $tabla .= '<tr>';
+                    $tabla .= '<td class="nvisible">' . $fila['id_persona'] . '</td>';
+                    $tabla .= '<td>' . $fila['nro_doc'] . '</td>';
+                    $tabla .= '<td class="txtfelf">' . $fila['nombre'] . '</td>';
+                    $tabla .= '<td>-</td>';
+                    $tabla .= '<td>' . $fila['telefono'] . '</td>';
+                    $tabla .= '<td>' . $fila['sexo'] . '</td>';
+                    $tabla .= '<td><i class="fa-solid fa-hospital-user icon-green"></i></td>';
+                    $tabla .= '<td><i class="fa-solid fa-file-medical icon-blue"></i></td>';
+                    $tabla .= '</tr>';
+                }
+            } else {
+                $tabla .= '<tr><td> NO SE ENCONTRARON REGISTROS </td></tr>';
+            }
+            echo $tabla;
             break;
     }
 }
