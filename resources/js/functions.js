@@ -227,7 +227,6 @@ $(function () {
     datos.append('idPersona', idprofesional)
     postData(datos).then(res => res.json()).then(res => {
       let respuesta = res[0]
-
       $('#nombreProfesional').val(respuesta.nombre)
       $('#direccion').val(respuesta.direccion)
       $('#provincia').val(respuesta.prov_ubigeo)
