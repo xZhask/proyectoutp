@@ -154,16 +154,14 @@ async function postData(data) {
   const response = await fetch('App/controllers/controllerPersona.php', {
     method: 'POST',
     body: data,
+    cache: 'no-cache',
   })
   return response
 }
 function ListarPacientes() {
   let datos = new FormData()
   datos.append('accion', 'LISTAR_PACIENTES')
-  postData(datos).then(res => res.text()).then((res) => {
-    console.log(res)
-    //$('#tbpacientes').html(res);
-  })
+  postData(datos).then(res => res.text()).then((res) => $('#tbpacientes').html(res))
 }
 function ListarProfesionales() {
   let datos = new FormData()
