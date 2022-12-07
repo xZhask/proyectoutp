@@ -1,0 +1,43 @@
+
+<div class="section">
+    <h1>Horarios</h1>
+    <div class="cont-tabla-registros">
+        <div class="header-tabla cont-flex">
+            <div class="cont-leyenda cont-flex">
+                <div class="div-leyenda cont-flex">
+                    <div class="cuadro-leyend disponible"></div>
+                    <label>Disponible</label>
+                </div>
+                <div class="div-leyenda cont-flex">
+                    <div class="cuadro-leyend ocupado"></div>
+                    <label>Ocupado</label>
+                </div>
+            </div>
+            <a id="BtnAddHorario" href="javascript:void(0)"><i class="fa-regular fa-clock"></i> Agregar Nuevo</a>
+            <div class="cont-buscador">
+                <button class="btn-list-toggle" id="BtnDivSelect">Seleccionar Profesional <i class="fa-solid fa-chevron-down"></i></button>
+                <ul class="opciones-list" id="list-profesionales">
+                    <!-- Ajax -->
+                </ul>
+            </div>            
+        </div>
+        <input type="hidden" name="IdProfesional" id="IdProfesional">
+        <input type="date" name="fechaInicial" id="fechaInicial" placeholder="fechaInicial" hidden>
+        <input type="date" name="fechaFinal" id="fechaFinal" placeholder="fechaFinal" hidden>
+        <div class="cont-table">
+            <i class="fa-solid fa-circle-chevron-left arrow-calendar" onclick="CambiarFechas('DISMINUIR')"></i>
+            <table id="THorario">
+                <!-- Ajax-->
+            </table>
+            <i class="fa-solid fa-circle-chevron-right arrow-calendar" onclick="CambiarFechas('AUMENTAR')"></i>
+        </div>
+    </div>
+</div>
+<script>
+    CargarSelectProfesionales()
+    $('.btn-list-toggle').click(function() {
+        $('.item-toggle').toggle('normal');
+        $('.opciones-list').toggleClass('Active')
+        $(this).toggleClass('activo')
+    });
+</script>

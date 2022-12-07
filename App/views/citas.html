@@ -1,0 +1,45 @@
+<div class="section">
+  <h1>Citas</h1>
+  <div class="cont-tabla-registros">
+    <div class="header-tabla">
+      <input type="date" name="fechacita" id="fechacita" class="input-filtro" />
+      <a id="BtnAddCita">
+        <i class="fa-solid fa-user-plus"></i>
+        <p>Agregar</p>
+      </a>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>FECHA</th>
+          <th>HORA</th>
+          <th>PACIENTE</th>
+          <th>PROCEDIMIENTO</th>
+          <th>REG. ATENCIÓN</th>
+          <th>REG. PAGO</th>
+          <th>EDITAR</th>
+          <th>ANULAR</th>
+        </tr>
+      </thead>
+      <tbody id="tbcitas" class="tblistado">
+        <tr>
+          <td>FECHA</td>
+          <td>HORA</td>
+          <td>PACIENTE</td>
+          <td>PROCEDIMIENTO</td>
+          <td>
+            <i class="fa-solid fa-comment-dots icon-blue add-atention"></i>
+          </td>
+          <td>
+            <i class="fa-solid fa-hand-holding-dollar icon-green add-pago"></i>
+          </td>
+          <td><i class="fa-solid fa-file-pen icon-blue"></i></td>
+          <td><i class="fa-solid fa-ban icon-red anular-cita"></i></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+  //CargarFechaActual()
+</script>

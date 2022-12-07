@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&family=Exo+2:wght@100;200;300;400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+:root{
+    --cinzel : 'Cinzel', serif;
+    --Exo : 'Exo 2', sans-serif;
+    --Rajdhani : 'Rajdhani', sans-serif;
+    --primary : #1488CC;
+    --secundary : #2B32B2;
+    --white : #ffffff;
+    --dark: #2f3640;
+    --smoke:#c8d6e5;
+    --inactive: #f1f2f6;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+}
+.wrapper{
+    width: 100%;
+    display: flex;
+}
+.wr-login{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
+    background-blend-mode: multiply;
+
+}
+.line-v{
+    border-right: 1px solid rgba(255,255,255,.4);
+    height: 15em;
+}
+.container{
+    display: flex;
+}
+.container-login{
+    gap: 5em;
+    align-items: center;
+}
+form{
+    padding: 2em;
+    background-color: rgba(255, 255, 255, .1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    font-size: 1.2em;
+    font-family: var(--Exo);
+    box-shadow: 0 5px 10px rgba(0,0,0,.1);
+}
+.tittle-form{
+    font-size: 2em;
+    font-weight: 800;
+    color: var(--white);
+    border-bottom: 3px solid rgba(255,255,255,.2);
+    
+}
+.cont-input,.cont-input input{
+    width: 100%;
+    position: relative;
+}
+.cont-input input{
+    padding: .5em;
+    font-size: 1em;
+    background-color: transparent;
+    padding-top: 20px;
+    color: var(--white);
+}
+.cont-button{
+    width: 100%;
+    /*text-align: end;*/
+}
+.cont-button button{
+    padding: 1em 2em;
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255,255,.4);
+    transition: all .4s ease-out;
+    -webkit-transition: all .4s ease-out;
+    -moz-transition: all .4s ease-out;
+    -ms-transition: all .4s ease-out;
+    -o-transition: all .4s ease-out;
+    color: var(--white);
+}
+.cont-button button:hover{
+    border: 1px solid var(--primary);
+    background-color: var(--primary);
+}
+.lbl-tag{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-bottom: 1px solid var(--smoke);
+}
+.text-tag{
+    bottom: 5px;
+    position: absolute;
+    color: var(--inactive);
+    transition: all 0.3s ease;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-ms-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+}
+.lbl-tag:after{
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: -1px;
+	width: 0%;
+	height: 100%;
+	border-bottom: 2px solid var(--primary);
+	transition: all 0.3s ease;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-ms-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+}
+.form input:focus + .lbl-tag:after, .form input:valid + .lbl-tag:after{
+    width: 100%;
+}
+.form input:focus + .lbl-tag .text-tag,.form input:valid + .lbl-tag .text-tag{
+    transform: translateY(-200%);
+    font-size: .7em;
+    color: rgba(255,255,255,.5);
+    -webkit-transform: translateY(-200%);
+    -moz-transform: translateY(-200%);
+    -ms-transform: translateY(-200%);
+    -o-transform: translateY(-200%);
+}
+.info-empresa{
+    font-family: var(--Rajdhani);
+    font-size: 1.5em;
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-shadow: 0 0 5px rgba(0,0,0,.3);
+}
+.logo{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5em;
+}
+.logo img{
+    max-height: 200px;
+}
+.info-empresa h4{
+    font-weight: 400;
+    margin-top: -10px;
+    color: rgba(255,255,255,.7);
+}
+.info-empresa h1{
+    letter-spacing: 1px;
+    font-size: 2.5em;
+    
+}
+/* ===================== INDEX =====================*/
+.aside, .content{
+    height: 100vh;
+}
+.aside{
+    width: 20%;
+    max-width: 250px;
+    border-right: 1px solid var(--smoke);
+    
+}
+.content{
+    width: 100%;
+}
+.header{
+    height: 85px;
+    width: 100%;
+}
+.aside .header{
+    background-color: var(--secundary) !important;
+}
+.content .header{
+background: #2B32B2;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #1488CC, #2B32B2);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #1488CC, #2B32B2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.list-menu{
+    width: 100%;
+}
+.list-menu li{
+    width: 100%;
+}
+.list-menu li a{
+    width: 100%;
+    background-color: red;
+}

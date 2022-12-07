@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/47b4aaa3bf.js" crossorigin="anonymous"></script>
+  <link href="resources/img/logo.svg" rel="icon" />
+  <link rel="stylesheet" href="resources/js/jquery-ui-1.12.1/jquery-ui.min.css" />
+  <link rel="stylesheet" href="resources/css/picnic.min.css" />
+  <link rel="stylesheet" href="resources/css/style.css" />
+  <link rel="stylesheet" href="resources/js/sweetalert2.min.css">
+  <title>Sistema Magusa</title>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div id="sidebar" class="sidebar">
+      <div class="cont-header header-sidebar">
+        <figure>
+          <img src="resources/img/logo.svg" alt="Magusa" />
+        </figure>
+        <h2>
+          MAGUSA
+          <br />
+          ARCOIRIS
+        </h2>
+      </div>
+      <div class="contenido-sidebar">
+        <span>
+          Menú
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+        </span>
+        <ul class="list-menu">
+          <li>
+            <a id="lnk-citas" href="/citas.html">
+              <i class="fa-solid fa-clipboard-list"></i>
+              <p>Citas</p>
+            </a>
+          </li>
+          <li>
+            <a id="lnk-horarios" href="/horarios.html">
+              <i class="fa-regular fa-clock"></i>
+              <p>Horarios</p>
+            </a>
+          </li>
+          <li>
+            <a id="lnk-atenciones" href="/atenciones.html">
+              <i class="fa-solid fa-laptop-medical"></i>
+              <p>Atenciones</p>
+            </a>
+          </li>
+          <li>
+            <a id="lnk-pacientes" href="/pacientes.html">
+              <i class="fa-solid fa-users-gear"></i>
+              <p>Pacientes</p>
+            </a>
+          </li>
+          <li>
+            <a id="lnk-profesionales" href="/profesionales.html">
+              <i class="fa-solid fa-user-doctor"></i>
+              <p>Profesionales</p>
+            </a>
+          </li>
+          <li>
+            <a id="lnk-servicios" href="/servicios.html">
+              <i class="fa-solid fa-grip"></i>
+              <p>Servicios</p>
+            </a>
+          </li>
+          <li>
+            <a id="lnk-reportes" href="/reporte.html">
+              <i class="fa-solid fa-chart-pie"></i>
+              <p>Reportes</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="cont-wrapper">
+      <div class="cont-header header-contwrapper">
+        <i class="fa-solid fa-bars icon-menu"></i>
+        <div class="cont-datosuser">
+          <figure class="avatar-user">
+            <img src="resources/img/avatars/imgprueba.png" />
+          </figure>
+          <span>Nombre Usuario</span>
+          <div id="opciones-user" class="opciones-user">
+            <div class="triangulo"></div>
+            <ul>
+              <li>
+                <a href="">
+                  <i class="fa-solid fa-gear"></i>
+                  <p>Cambiar Contraseña</p>
+                </a>
+              </li>
+              <li class="linea"></li>
+              <li id="BtnCambioAvatar">
+                <a href="javascript:void(0)">
+                  <i class="fa-regular fa-images"></i>
+                  <p>Cambiar Foto</p>
+                </a>
+              </li>
+              <li class="linea"></li>
+              <li>
+                <a class="btn-salir-sesion" href="">
+                  <i class="fa-solid fa-power-off"></i>
+                  <p>Cerrar Sesión</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="contenido-wrapper" class="contenido-wrapper">
+        <div id="wrapper-section" class="section">
+          <!--  Ajax  -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  Modal  -->
+  <div id="modal" class="modal">
+    <div class="modal-dialog">
+      <a href="#" class="close-modal-area"></a>
+      <div class="modal-content w650">
+        <header class="container">
+          <h5 id="TittleForm">Registro de Profesional</h5>
+          <a href="javascript:void(0)" class="closebtn">×</a>
+        </header>
+        <div class="container body-modal">
+          <!-- FORM PROFESIONAL -->
+          <form id="FrmProfesional" autocomplete="off">
+            <input type="hidden" name="accion" id="accionProfesional" />
+            <input type="hidden" name="tipoP" value="Profesional" />
+            <div class="cont-input-form">
+              <select name="tipodoc" id="tipodoc">
+                <option value="1">DNI</option>
+                <option value="2">C/E</option>
+              </select>
+              <input type="text" id="nrodocProf" name="nrodocProf" placeholder="Número de documento" />
+              <div class="btn-search" id="btn-btnSearchProf">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
+            </div>
+            <div class="cont-input-form">
+              <input type="text" id="nombreProfesional" name="nombreProfesional" placeholder="Nombre" readonly />
+            </div>
+            <div class="cont-input-form">
+              <input type="text" id="direccion" name="direccion" placeholder="Dirección" />
+            </div>
+            <div class="cont-input-form">
+              <input type="text" id="departamento" name="departamento" placeholder="Departamento" />
+              <input type="text" id="provincia" name="provincia" placeholder="Provincia" />
+            </div>
+            <div class="cont-input-form">
+              <input type="text" id="telefono" name="telefono" placeholder="Teléfono" />
+              <input type="text" id="colegiatura" name="colegiatura" placeholder="Colegiatura" />
+            </div>
+            <div class="cont-input-form">
+              <div class="cont-input-form group-input">
+                <label for="fechaNac">Fecha Nac.:</label>
+                <input type="date" name="fechaNac" id="fechaNac" />
+              </div>
+              <div class="cont-input-form group-input">
+                <label for="fechaNac">Sexo:</label>
+                <select name="sexo" id="sexo">
+                  <option value="0">Seleccionar</option>
+                  <option value="M">Masculino</option>
+                  <option value="F">Femenino</option>
+                </select>
+              </div>
+            </div>
+            <div class="cont-input-form">
+              <input type="text" id="email" name="email" placeholder="email" />
+            </div>
+            <fieldset>
+              <legend>Opciones de Usuario</legend>
+              <div class="cont-input-form">
+                <input type="password" id="passw" name="passw" placeholder="Contraseña" />
+                <select name="EstadoUsuario" id="EstadoUsuario">
+                  <option value="1">ACTIVO</option>
+                  <option value="0">INACTIVO</option>
+                </select>
+              </div>
+            </fieldset>
+            <button type="submit" id="btnProfesional" name="btnProfesional" class="btnform">
+              Registrar Profesional
+            </button>
+          </form>
+          <!-- FORM HORARIO -->
+          <form id="FrmHorario">
+            <div class="cont-input-form">
+              <input type="date" placeholder="Teléfono" />
+            </div>
+            <div class="cont-input-form">
+              <input type="time" placeholder="email" />
+            </div>
+            <button type="submit" class="btnform">Registrar Horario</button>
+          </form>
+          <!-- FORM CITA -->
+          <form id="FrmCita" autocomplete="off">
+            <input type="hidden" name="accion" value="REGISTRAR_CITA" />
+            <div class="cont-input-form">
+              <input type="text" name="NroDocCita" id="NroDocCita" placeholder="Número de documento" />
+              <div class="btn-search search-paciente-cita">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
+              <input type="hidden" name="TipoPaciente" id="TipoPaciente" />
+              <input type="hidden" name="id_paciente" id="id_paciente" />
+            </div>
+            <div class="cont-input-form cont-DatosPacienteCita">
+              <input type="text" id="DatosPacienteCita" name="DatosPacienteCita" placeholder="Nombre de Paciente" />
+            </div>
+            <div class="cont-datos-nvisible">
+              <div class="cont-input-form">
+                <input type="text" placeholder="Nombre" id="NombreCita" name="NombreCita" />
+                <input type="text" placeholder="Apellidos" id="ApellidosCita" name="ApellidosCita" />
+              </div>
+              <div class="cont-input-form">
+                <input type="date" name="FechaNacCita" id="FechaNacCita" />
+                <input type="text" id="TeléfonoCita" name="TeléfonoCita" placeholder="Teléfono" />
+              </div>
+            </div>
+            <div class="cont-input-form">
+              <select name="ServicioCita" id="ServicioCita" onchange="CargarSubServicios()">
+                <!--Ajax-->
+              </select>
+            </div>
+            <div class="cont-input-form">
+              <select name="SubServicio" id="SubServicio">
+                <!--Ajax-->
+              </select>
+            </div>
+            <div class="cont-input-form">
+              <input type="date" name="fecharegcita" id="fecharegcita" />
+              <select name="HorarioCita" id="HorarioCita">
+                <option value="0">Seleccione Horario</option>
+              </select>
+            </div>
+            <button type="button" onclick="RegistrarCita()" class="btnform">
+              Registrar Cita
+            </button>
+          </form>
+          <form id="FrmCambioAvatar">
+            <div class="cont-imagenes">
+              <div class="cont_img">
+                <img src="resources/img/avatars/imgprueba.png" alt="Foto Actual" />
+              </div>
+              <i class="fa-solid fa-angles-right"></i>
+              <div class="cont_img">
+                <label class="dropimage">
+                  <input accept="image/png,image/jpeg" title="Dar click o arrastrar imagen" type="file"
+                    name="AvatarNuevo" id="AvatarNuevo" required />
+                </label>
+              </div>
+            </div>
+            <button type="submit" class="btnform">Cambiar Avatar</button>
+          </form>
+          <form id="FrmPaciente">
+            <div class="cont-input-form">
+              <input type="text" placeholder="Número de documento" />
+              <div class="btn-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
+            </div>
+            <div class="cont-input-form">
+              <input type="text" placeholder="Nombre" />
+              <input type="text" placeholder="Apellidos" />
+            </div>
+            <div class="cont-input-form">
+              <input type="text" placeholder="Dirección" />
+            </div>
+            <div class="cont-input-form">
+              <input type="date" name="FechaNac" id="FechaNac" />
+              <select name="EstadoCivil" id="EstadoCivil">
+                <option value="0">Estado Civil</option>
+                <option value="1">Soltero(a)</option>
+                <option value="2">Casado(a)</option>
+                <option value="3">Divorciado(a)</option>
+                <option value="4">Viudo(a)</option>
+              </select>
+            </div>
+            <div class="cont-input-form">
+              <input type="text" placeholder="Grado Instrucción" />
+              <input type="text" placeholder="Ocupación" />
+            </div>
+            <div class="cont-input-form">
+              <input type="text" placeholder="Teléfono" />
+            </div>
+            <div class="cont-input-form">
+              <input type="email" placeholder="E-mail" />
+            </div>
+            <button type="submit" class="btnform">Registrar Paciente</button>
+          </form>
+          <form id="FrmAtencion">
+            <input type="hidden" name="accion" value="REGISTRAR_ATENCION" />
+            <div class="cont-input-form">
+              <input type="hidden" name="IdPaciente" />
+              <input type="text" placeholder="Nombre" id="NombrePacienteAtencion" name="NombrePacienteAtencion"
+                readonly />
+              <input type="text" class="input-small" name="EdadPacienteAtencion" id="EdadPacienteAtencion"
+                placeholder="Edad" readonly />
+            </div>
+            <div class="cont-input-form">
+              <textarea name="MotivoConsulta" id="MotivoConsulta" cols="30" rows="5"
+                placeholder="Motivo de Consulta"></textarea>
+              <textarea name="ObservacionGeneral" id="ObservacionGeneral" cols="30" rows="5"
+                placeholder="Observaciones Generales"></textarea>
+            </div>
+            <div class="cont-input-form">
+              <textarea name="HistoriaFamiliar" id="HistoriaFamiliar" cols="30" rows="5"
+                placeholder="Historia Familiar"></textarea>
+              <textarea name="HistoriaPersonal" id="HistoriaPersonal" cols="30" rows="5"
+                placeholder="Historia Personal"></textarea>
+            </div>
+            <div class="cont-input-form">
+              <div class="cont-input-form input-small">
+                <input type="text" name="CodCie10" id="CodCie10" placeholder="CIE10" />
+                <div class="btn-search">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+              </div>
+              <input type="text" name="Diagnostico" id="Diagnostico" placeholder="Diagnóstico" />
+            </div>
+            <div class="cont-input-form">
+              <textarea name="ProcedimientoAtencion" id="ProcedimientoAtencion" cols="30" rows="5"
+                placeholder="Procedimiento"></textarea>
+            </div>
+            <button type="submit" class="btnform">Registrar Atención</button>
+          </form>
+          <form id="FrmServicio">
+            <div class="cont-input-form">
+              <select name="Servicio" id="Servicio">
+                <!-- Ajax -->
+              </select>
+            </div>
+            <div class="cont-input-form">
+              <input type="text" name="NombreSubServicio" id="NombreSubServicio" placeholder="Nombre de Sub-Servicio" />
+            </div>
+            <div class="cont-input-form">
+              <input type="text" name="PrecioServicio" id="PrecioServicio" placeholder="Precio de Servicio" />
+            </div>
+            <button type="submit" class="btnform">Registrar Servicio</button>
+          </form>
+          <form id="FrmProcedimiento">
+            <input type="hidden" name="accion" value="REGISTRAR_PROCEDIMIENTO" />
+            <div class="cont-input-form">
+              <input type="hidden" name="IdPacienteProcedimiento" />
+              <input type="text" placeholder="Nombre" id="NombrePacienteProcedimiento"
+                name="NombrePacienteProcedimiento" readonly />
+              <input type="text" class="input-small" name="EdadPacienteProcedimiento" id="EdadPacienteProcedimiento"
+                placeholder="Edad" readonly />
+            </div>
+            <div class="cont-input-form">
+              <textarea name="Procedimiento" id="Procedimiento" cols="30" rows="5"
+                placeholder="Procedimiento"></textarea>
+            </div>
+            <button type="submit" class="btnform">
+              Registrar Procedimiento
+            </button>
+          </form>
+          <form id="FrmPago">
+            <div class="cont-input-form">
+              <select name="TipoPago" id="TipoPago">
+                <!-- Ajax -->
+                <option value="EFECTIVO">EFECTIVO</option>
+                <option value="YAPE">YAPE</option>
+                <option value="TRANSFERENCIA">TRANSFERENCIA</option>
+                <option value="PLIN">PLIN</option>
+              </select>
+            </div>
+            <div class="cont-input-form">
+              <input type="text" name="MontoTotalPago" id="MontoTotalPago" placeholder="Precio de Servicio" />
+            </div>
+            <div class="cont-input-form">
+              <input type="text" name="PagoCuenta" id="PagoCuenta" placeholder="A Cuenta" />
+            </div>
+            <button type="submit" class="btnform">Registrar Servicio</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="resources/js/sweetalert2.all.min.js"></script>
+  <script language="javascript" src="resources/js/jquery-3.6.0.min.js"></script>
+  <script language="javascript" src="resources/js/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+  <script src="resources/js/main.js"></script>
+  <script language="javascript" src="resources/js/functions.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      ;[].forEach.call(document.querySelectorAll('.dropimage'), function (
+        img,
+      ) {
+        img.onchange = function (e) {
+          var inputfile = this,
+            reader = new FileReader()
+          reader.onloadend = function () {
+            inputfile.style['background-image'] = 'url(' + reader.result + ')'
+          }
+          reader.readAsDataURL(e.target.files[0])
+        }
+      })
+    })
+  </script>
+</body>
+
+</html>
