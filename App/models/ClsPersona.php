@@ -3,14 +3,18 @@ require_once 'conexion.php';
 
 class ClsPersona
 {
-    function ListarPersonal()
+    function ListarPersonas($tipo)
     {
         $sql =
-            'SELECT p.id_persona, p.nro_doc, p.nombre, p.n_colegiatura, p.estado, p.tipo_persona,c.telefono,c.email
-            FROM persona p INNER JOIN contacto c ON p.id_persona=c.id_persona
-            WHERE p.tipo_persona="E"';
+            'SELECT p.id_persona, p.nro_doc, p.nombre, p.n_colegiatura, p.estado,p.sexo,c.telefono,c.email
+            FROM persona p INNER JOIN contacto c ON p.id_persona=c.id_persona WHERE p.tipo_persona=:tipo';
         global $cnx;
-        return $cnx->query($sql);
+        $parametros = [
+            ':tipo' => $tipo,
+        ];
+        $pre = $cnx->prepare($sql);
+        $pre->execute($parametros);
+        return $pre;
     }
     function RegistrarPersona($DatosPersona)
     {
@@ -62,13 +66,5 @@ class ClsPersona
         $pre = $cnx->prepare($sql);
         $pre->execute($parametros);
         return $pre;
-    }
-    function ListarPacientes()
-    {
-        $sql =
-            'SELECT p.id_persona, p.nro_doc, p.nombre, p.n_colegiatura, p.estado, p.tipo_persona,p.sexo,c.telefono,c.email
-            FROM persona p INNER JOIN contacto c ON p.id_persona=c.id_persona WHERE p.tipo_persona="P"';
-        global $cnx;
-        return $cnx->query($sql);
     }
 }

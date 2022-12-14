@@ -39,10 +39,13 @@ function controlador($accion)
                 echo $response;
             }
             break;
-        case 'LISTAR_PROFESIONALES':
-            $tabla = '';
-            $listaPersonales = $objPersona->ListarPersonal();
-            if ($listaPersonales->rowCount() > 0) {
+        case 'LISTAR_PERSONAS':
+            //$tabla = '';
+            $tipoPersona = $_POST['tipoPersona'];
+            $listadoPersonas = $objPersona->ListarPersonas($tipoPersona);
+            $listadoPersonas = $listadoPersonas->fetchAll(PDO::FETCH_OBJ);
+            echo json_encode($listadoPersonas);
+            /* if ($listaPersonales->rowCount() > 0) {
                 while ($fila = $listaPersonales->fetch(PDO::FETCH_NAMED)) {
                     $tabla .= '<tr>';
                     $tabla .= '<td class="nvisible">' . $fila['id_persona'] . '</td>';
@@ -57,7 +60,7 @@ function controlador($accion)
             } else {
                 $tabla .= '<tr><td> NO SE ENCONTRARON REGISTROS </td></tr>';
             }
-            echo $tabla;
+            echo $tabla; */
             break;
         case 'REGISTRAR_PERSONA':
             $nro_doc = $_POST['nrodocProf'];
@@ -169,27 +172,6 @@ function controlador($accion)
             $infoPersona = $objPersona->BuscarPersona($_POST['nrodoc']);
             $infoPersona = $infoPersona->fetchAll(PDO::FETCH_OBJ);
             echo json_encode($infoPersona);
-            break;
-        case 'LISTAR_PACIENTES':
-            $tabla = '';
-            $listaPacientes = $objPersona->ListarPacientes();
-            if ($listaPacientes->rowCount() > 0) {
-                while ($fila = $listaPacientes->fetch(PDO::FETCH_NAMED)) {
-                    $tabla .= '<tr>';
-                    $tabla .= '<td class="nvisible">' . $fila['id_persona'] . '</td>';
-                    $tabla .= '<td>' . $fila['nro_doc'] . '</td>';
-                    $tabla .= '<td class="txtfelf">' . $fila['nombre'] . '</td>';
-                    $tabla .= '<td>-</td>';
-                    $tabla .= '<td>' . $fila['telefono'] . '</td>';
-                    $tabla .= '<td>' . $fila['sexo'] . '</td>';
-                    $tabla .= '<td><i class="fa-solid fa-hospital-user icon-green"></i></td>';
-                    $tabla .= '<td><i class="fa-solid fa-file-medical icon-blue"></i></td>';
-                    $tabla .= '</tr>';
-                }
-            } else {
-                $tabla .= '<tr><td> NO SE ENCONTRARON REGISTROS </td></tr>';
-            }
-            echo $tabla;
             break;
     }
 }
