@@ -40,27 +40,10 @@ function controlador($accion)
             }
             break;
         case 'LISTAR_PERSONAS':
-            //$tabla = '';
             $tipoPersona = $_POST['tipoPersona'];
             $listadoPersonas = $objPersona->ListarPersonas($tipoPersona);
             $listadoPersonas = $listadoPersonas->fetchAll(PDO::FETCH_OBJ);
             echo json_encode($listadoPersonas);
-            /* if ($listaPersonales->rowCount() > 0) {
-                while ($fila = $listaPersonales->fetch(PDO::FETCH_NAMED)) {
-                    $tabla .= '<tr>';
-                    $tabla .= '<td class="nvisible">' . $fila['id_persona'] . '</td>';
-                    $tabla .= '<td class="txtfelf">' . $fila['nombre'] . '</td>';
-                    $tabla .= '<td>' . $fila['nro_doc'] . '</td>';
-                    $tabla .= '<td>' . $fila['n_colegiatura'] . '</td>';
-                    $tabla .= '<td>' . $fila['telefono'] . '</td>';
-                    $tabla .= '<td>' . $fila['email'] . '</td>';
-                    $tabla .= '<td><i class="fa-solid fa-user-pen icon-green edit-user"></i></td>';
-                    $tabla .= '</tr>';
-                }
-            } else {
-                $tabla .= '<tr><td> NO SE ENCONTRARON REGISTROS </td></tr>';
-            }
-            echo $tabla; */
             break;
         case 'REGISTRAR_PERSONA':
             $nro_doc = $_POST['nrodocProf'];

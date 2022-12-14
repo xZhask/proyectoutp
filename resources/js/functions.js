@@ -57,7 +57,7 @@ function cambiarFile() {
   ).innerHTML = `<p>${archivo}</p><i class="fa-solid fa-cloud-arrow-up"></i>`;
 }
 $(function () {
-  $(document).on("click", "#BtnAddProfesional", function (event) {
+  $(document).on("click", "#BtnAddProfesional", function (e) {
     mostrarmodal("Registro de Profesional");
     $("#FrmProfesional").css("display", "block");
     $("#accionProfesional").val("REGISTRAR_PERSONA");
@@ -65,39 +65,39 @@ $(function () {
   });
 });
 $(function () {
-  $(document).on("click", "#BtnAddPaciente", function (event) {
+  $(document).on("click", "#BtnAddPaciente", function (e) {
     mostrarmodal("Registro de Paciente");
     $("#FrmPaciente").css("display", "block");
   });
 });
 $(function () {
-  $(document).on("click", "#BtnAddHorario", function (event) {
+  $(document).on("click", "#BtnAddHorario", function (e) {
     mostrarmodal("Registro de Horario");
     $("#FrmHorario").css("display", "block");
   });
 });
 $(function () {
-  $(document).on("click", "#BtnAddCita", function (event) {
+  $(document).on("click", "#BtnAddCita", function (e) {
     mostrarmodal("Registro de Cita");
     $("#FrmCita").css("display", "block");
   });
 });
 $(function () {
-  $(document).on("click", "#tbhorario .disponible", function (event) {
-    text = $(event.target).text();
+  $(document).on("click", "#tbhorario .disponible", function (e) {
+    text = $(e.target).text();
     fecha = $(this).prop("title");
     mostrarmodal("Registro de Cita <br> " + fecha + " " + text);
     $("#FrmCita").css("display", "block");
   });
 });
 $(function () {
-  $(document).on("click", "#BtnCambioAvatar", function (event) {
+  $(document).on("click", "#BtnCambioAvatar", function (e) {
     mostrarmodal("Cambiar Foto");
     $("#FrmCambioAvatar").css("display", "block");
   });
 });
 $(function () {
-  $(document).on("click", "#BtnAddServicio", function (event) {
+  $(document).on("click", "#BtnAddServicio", function (e) {
     mostrarmodal("Agregar Servicio");
     $("#FrmServicio").css("display", "block");
   });
@@ -115,29 +115,29 @@ function cerrarModal() {
   $(".cont-datos-nvisible").removeClass("active");
   $(".cont-DatosPacienteCita").removeClass("oculto");
 }
-$(".closebtn").click(function (event) {
+$(".closebtn").click(function (e) {
   cerrarModal();
 });
-$(".close-modal-area").click(function (event) {
-  event.preventDefault();
+$(".close-modal-area").click(function (e) {
+  e.preventDefault();
   cerrarModal();
 });
 $(function () {
-  $(document).on("click", ".add-atention", function (event) {
+  $(document).on("click", ".add-atention", function (e) {
     $(".modal-content").removeClass("w650");
     mostrarmodal("Registro de Atención");
     $("#FrmAtencion").css("display", "block");
   });
 });
 $(function () {
-  $(document).on("click", ".add-procedure", function (event) {
+  $(document).on("click", ".add-procedure", function (e) {
     $(".modal-content").removeClass("w650");
     mostrarmodal("Registro de Procedimiento");
     $("#FrmProcedimiento").css("display", "block");
   });
 });
 $(function () {
-  $(document).on("click", ".add-pago", function (event) {
+  $(document).on("click", ".add-pago", function (e) {
     mostrarmodal("Registrar Pago");
     $("#FrmPago").css("display", "block");
   });
@@ -164,16 +164,39 @@ async function ListarPersonas(tipoPersona) {
   let datos = new FormData();
   datos.append("accion", "LISTAR_PERSONAS");
   datos.append("tipoPersona", tipoPersona);
-  const personas = await (await postData(datos)).json();
-  renderProfesionales(personas);
+  let personas = await (await postData(datos)).json();
+  tipoPersona == 'E' ? renderProfesionales(personas) : renderPacientes(personas);
 }
+//<td class="nvisible">' . $fila['id_persona'] . '</td>
 function renderProfesionales(personas) {
-  const listPersonas = personas.map(
+  let listPersonas = personas.map(
     (persona) =>
-      `<tr><td>${persona.nombre}</td><td>${persona.nro_doc}</td><td>${persona.n_colegiatura}</td><td>${persona.telefono}</td><td>${persona.email}</td><td><i class='fa-solid fa-user-pen icon-green edit-user'></i></td></tr>`
+      `<tr><td class='txtfelf'>${persona.nombre}</td><td>${persona.nro_doc}</td><td>${persona.n_colegiatura}</td><td>${persona.telefono}</td><td>${persona.email}</td><td><i class='fa-solid fa-user-pen icon-green edit-user'></i></td></tr>`
   );
-  const cadenaProfesionales = JSON.stringify(listPersonas);
+  let cadenaProfesionales = JSON.stringify(listPersonas);
   $("#tbProfesionales").html(cadenaProfesionales);
+}
+function renderPacientes(personas) {
+  let listPersonas = personas.map(
+    (persona) => {
+      let edad = calcularEdad(persona.fecha_nac)
+      return `<tr><td>${persona.nro_doc}</td><td>${persona.nombre}</td><td>${edad}</td><td>${persona.telefono}</td><td>${persona.sexo}</td><td><i class='fa-solid fa-hospital-user icon-green'></i></td><td><i class='fa-solid fa-file-medical icon-blue'></i></td></tr>`
+    }
+  );
+  let cadenaPacientes = JSON.stringify(listPersonas);
+  $("#tbPacientes").html(cadenaPacientes);
+  console.log(cadenaPacientes)
+}
+
+function calcularEdad(fecha) {
+  var hoy = new Date();
+  var fechaNacimiento = new Date(fecha);
+  var edadYears = hoy.getFullYear() - fechaNacimiento.getFullYear();
+  var meses = hoy.getMonth() - fechaNacimiento.getMonth();
+  if (meses < 0 || (meses === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+    edadYears--;
+  }
+  return edadYears;
 }
 /* $(function () {
   $(document).on("click", "#btn-btnSearchProf", function (e) {
@@ -196,7 +219,6 @@ function renderProfesionales(personas) {
     } else alert("INGRESE N° DE DOCUMENTO A BUSCAR");
   });
 });
-
 frmProfesional.addEventListener("submit", (e) => {
   e.preventDefault();
   let form = new FormData(frmProfesional);

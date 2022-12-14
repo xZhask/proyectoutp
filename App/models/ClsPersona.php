@@ -6,7 +6,7 @@ class ClsPersona
     function ListarPersonas($tipo)
     {
         $sql =
-            'SELECT p.id_persona, p.nro_doc, p.nombre, p.n_colegiatura, p.estado,p.sexo,c.telefono,c.email
+            'SELECT p.id_persona, p.nro_doc, p.nombre, p.fecha_nac, p.sexo, p.n_colegiatura, p.estado, c.telefono, c.email
             FROM persona p INNER JOIN contacto c ON p.id_persona=c.id_persona WHERE p.tipo_persona=:tipo';
         global $cnx;
         $parametros = [
